@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Моя девочка — Техническое задание</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap');
+  :root{--bg:#f4f6fb;--panel:#fff;--ink:#1a2230;--mut:#6b7a90;--line:#e6eaf2;--acc:#7c5cfc;
+        --ok:#16a34a;--okbg:#e9f8ef;--plan:#2563eb;--planbg:#e8f0fe;--org:#64748b;--orgbg:#eef1f6;--shadow:0 6px 22px rgba(20,30,50,.06)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 'Manrope',-apple-system,Segoe UI,sans-serif;padding:28px 16px 70px}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--mut);margin:0 0 18px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+  .lg{font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:20px}
+  .ok{background:var(--okbg);color:var(--ok)}.plan{background:var(--planbg);color:var(--plan)}.org{background:var(--orgbg);color:var(--org)}
+  .part{font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;margin:32px 2px 14px;padding-left:12px;border-left:5px solid var(--acc)}
+  .part.b1{border-color:#e0791b}.part.b2{border-color:#0d9488}.part.b3{border-color:#db2777}
+  .part small{display:block;font-family:'Manrope';font-weight:500;font-size:13px;color:var(--mut);margin-top:3px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px 22px;margin-bottom:16px}
+  .card h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;margin:0 0 10px}
+  .card h3{font-size:14px;font-weight:700;margin:16px 0 6px;color:var(--acc);text-transform:uppercase;letter-spacing:.03em}
+  ul{margin:6px 0 2px;padding-left:20px}li{margin:4px 0}
+  .step{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--line);align-items:start}
+  .step:first-of-type{border-top:0}
+  .num{width:28px;height:28px;border-radius:9px;background:#f0eefb;color:var(--acc);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .sf{font-weight:600}.sc{color:var(--mut);font-size:13.5px}
+  .b{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  code{background:#f0eefb;color:var(--acc);padding:1px 6px;border-radius:5px;font-size:12.5px}
+  .note{background:#fbf7ff;border:1px solid #ece3ff;border-radius:12px;padding:12px 15px;color:#5a4b7a;font-size:13.5px;margin:10px 0}
+  .goal{background:linear-gradient(135deg,#f3efff,#eef3ff);border:1px solid #e4dbff;border-radius:16px;padding:18px 22px;margin-bottom:18px}
+  .goal b{color:var(--acc)}
+  .before-after{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 2px}
+  .ba{border:1px solid var(--line);border-radius:12px;padding:12px 15px;font-size:13.5px}
+  .ba.old{background:#fff6f6;border-color:#f6dede}.ba.new{background:#f2fbf5;border-color:#d7eede}
+  .ba .t{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+  .ba.old .t{color:#c0392b}.ba.new .t{color:var(--ok)}
+  @media(max-width:620px){.before-after{grid-template-columns:1fr}}
+  .foot{color:var(--mut);text-align:center;font-size:12.5px;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🛍️ Моя девочка — Техническое задание</h1>
+  <p class="sub">AI-агент для магазина одежды. Главная задача: <b>убрать все ручные таблицы</b> (продажи из 1С + Instagram) и заменить их умным Telegram-ботом. Принцип: <b>цифры считает код, выводы и рекомендации формулирует AI</b>.</p>
+  <div class="legend">
+    <span class="lg org">➖ от клиента</span>
+  </div>
+
+  <div class="goal">
+    <b>Что это даёт магазину.</b> Вы перестаёте вести таблицы вручную. Бот сам собирает данные из 1С и Instagram, считает все показатели и присылает в Telegram готовый отчёт <b>с выводами и рекомендациями</b> — за день, неделю и месяц.
+  </div>
+
+  <div class="card">
+    <h2>Две задачи агента</h2>
+    <h3>1. Ручное заполнение таблиц → работа AI-агента</h3>
+    <div class="before-after">
+      <div class="ba old"><div class="t">Было</div>Продавцы/бухгалтер вручную сводят продажи из&nbsp;1С и статистику Instagram в таблицы Excel.</div>
+      <div class="ba new"><div class="t">Стало</div>Всю эту работу выполняет AI-агент: сам собирает данные из 1С и Instagram, считает показатели и формулирует выводы. Заполнять таблицы вручную не нужно.</div>
+    </div>
+    <h3>2. Instagram: профиль + тренды + стратегия</h3>
+    <ul>
+      <li><b>Анализ профиля</b> — что из контента «залетело», что провалилось, какие форматы/часы/хэштеги работают.</li>
+      <li><b>Анализ трендов</b></li>
+      <li><b>Контент-стратегия</b> — готовые AI-рекомендации: что и когда публиковать.</li>
+    </ul>
+  </div>
+
+  <!-- ЭТАП 0 -->
+  <div class="part b3">Этап 0 — Согласование <small>Сейчас. Фиксируем точное ТЗ по ответам клиента.</small></div>
+  <div class="card">
+    <div class="step"><div class="num">1</div><div><div class="sf">Клиент отвечает на вопросы</div><div class="sc">Доступы, метрики, формат отчётов, сроки — по отдельному опроснику.</div></div></div>
+    <div class="step"><div class="num">2</div><div><div class="sf">Фиксируем ТЗ, тариф, сроки, критерий приёмки</div><div class="sc">Что именно считаем «готово» — пример отчёта на реальных данных за прошлую неделю.</div></div></div>
+  </div>
+
+  <!-- ЭТАП 1 -->
+  <div class="part b1">Этап 1 — Аналитик продаж из 1С <small>Убираем ручные таблицы по продажам.</small></div>
+  <div class="card">
+    <h2>Что считает агент (вместо вас)</h2>
+    <h3>По каждому продавцу</h3>
+    <ul>
+      <li><b>Средний чек</b> и выручка</li>
+      <li><b>УПТ</b> — единиц товара в чеке</li>
+      <li><b>Конверсия</b> в продажу (из зашедших — купили)</li>
+      <li><b>Рейтинг</b> продавцов + рекомендации, кому какой показатель улучшить</li>
+    </ul>
+    <h3>По товарам</h3>
+    <ul>
+      <li><b>Хиты продаж</b>: цвет / размер / модель — что повторить и докупить срочно</li>
+    </ul>
+    <h3>Отчёты</h3>
+    <ul>
+      <li>День / неделя / месяц в Telegram: цифры + рейтинг + хиты + AI-выводы</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Шаги реализации</h2>
+    <div class="step"><div class="num">1</div><div><div class="sf">Доступ к 1С <span class="b org">➖ от клиента</span></div></div></div>
+    <div class="step"><div class="num">2</div><div><div class="sf">Коннектор и загрузка данных</div><div class="sc">Чеки, строки чеков, номенклатура, продавцы — проверка полноты данных и подключение к ним AI-агента.</div></div></div>
+    <div class="step"><div class="num">3</div><div><div class="sf">Расчёт метрик</div><div class="sc">Средний чек, УПТ, выручка, конверсия по продавцу.</div></div></div>
+    <div class="step"><div class="num">4</div><div><div class="sf">Рейтинг + хиты товаров</div><div class="sc">Лучшие/слабые продавцы, топ по цвету/размеру/модели.</div></div></div>
+    <div class="step"><div class="num">5</div><div><div class="sf">AI-выводы</div><div class="sc">Кому что подтянуть, что докупить, на чём сделать упор.</div></div></div>
+    <div class="step"><div class="num">6</div><div><div class="sf">Отчёты день/неделя/месяц в Telegram</div><div class="sc">Готовые сообщения по расписанию.</div></div></div>
+    <div class="step"><div class="num">7</div><div><div class="sf">Тест на реальных данных → приёмка</div></div></div>
+  </div>
+
+  <!-- ЭТАП 2 -->
+  <div class="part b2">Этап 2 — Маркетолог: Instagram и ВКонтакте <small>Ядро уже готово и протестировано на реальных данных.</small></div>
+  <div class="card">
+    <h2>Что делает агент</h2>
+    <h3>Instagram</h3>
+    <ul>
+      <li>Метрики каждого поста/рилса: охваты, просмотры, лайки, комментарии, репосты, сохранения, ER</li>
+      <li>Метрики аккаунта (ежедневный снимок): подписчики и прирост, охват, клики, демография, онлайн-часы</li>
+      <li><b>Анализ профиля</b>: детект «залетевших» и провалов, лучшие форматы/хэштеги/часы</li>
+      <li><b>Анализ трендов</b></li>
+      <li><b>Контент-стратегия</b>: что и когда публиковать</li>
+      <li>Отчёты день/неделя/месяц в Telegram</li>
+    </ul>
+    <h3>ВКонтакте</h3>
+    <ul>
+      <li>Метрики каждого поста/клипа: охваты, просмотры, лайки, комментарии, репосты, сохранения, ER</li>
+      <li>Метрики сообщества (ежедневный снимок): подписчики и прирост, охват, демография, источники переходов</li>
+      <li><b>Анализ контента</b>: детект «залетевших» и провалов, лучшие форматы и часы</li>
+      <li><b>Анализ трендов</b></li>
+      <li><b>Контент-стратегия</b>: что и когда публиковать</li>
+      <li>Отчёты день/неделя/месяц в Telegram</li>
+    </ul>
+  </div>
+
+  <p class="foot">Моя девочка · AI-агенты для магазина · Техническое задание · 2026</p>
+</div>
+</body>
+</html>
