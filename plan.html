@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Моя девочка — План реализации AI-агентов</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap');
+  :root{--bg:#f4f6fb;--panel:#fff;--ink:#1a2230;--mut:#6b7a90;--line:#e6eaf2;--acc:#7c5cfc;
+        --ok:#16a34a;--okbg:#e9f8ef;--plan:#2563eb;--planbg:#e8f0fe;--org:#64748b;--orgbg:#eef1f6;
+        --warn:#e0791b;--warnbg:#fff4e8;--shadow:0 6px 22px rgba(20,30,50,.06)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 'Manrope',-apple-system,Segoe UI,sans-serif;padding:28px 16px 70px}
+  .wrap{max-width:940px;margin:0 auto}
+  h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:27px;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--mut);margin:0 0 18px}
+  .toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 20px;margin-bottom:18px;font-size:14px}
+  .toc b{font-family:'Unbounded';font-size:13px}
+  .toc a{color:var(--acc);text-decoration:none;margin-right:4px}
+  .toc ol{margin:8px 0 0;padding-left:22px;columns:2;column-gap:28px}
+  .toc li{margin:3px 0;break-inside:avoid}
+  .part{font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;margin:34px 2px 14px;padding-left:12px;border-left:5px solid var(--acc);scroll-margin-top:12px}
+  .part.g{border-color:#e0791b}.part.b{border-color:#0d9488}.part.p{border-color:#db2777}
+  .part small{display:block;font-family:'Manrope';font-weight:500;font-size:13px;color:var(--mut);margin-top:3px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px 24px;margin-bottom:16px}
+  .card h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;margin:0 0 10px}
+  .card h3{font-size:13.5px;font-weight:700;margin:18px 0 6px;color:var(--acc);text-transform:uppercase;letter-spacing:.03em}
+  ul,ol.list{margin:6px 0 2px;padding-left:20px}li{margin:4px 0}
+  .goal{background:linear-gradient(135deg,#f3efff,#eef3ff);border:1px solid #e4dbff;border-radius:16px;padding:18px 24px;margin-bottom:18px}
+  .goal b{color:var(--acc)}
+  .step{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--line);align-items:start}
+  .step:first-of-type{border-top:0}
+  .num{width:30px;height:30px;border-radius:9px;background:#f0eefb;color:var(--acc);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center}
+  .sf{font-weight:700}.sc{color:var(--mut);font-size:13.5px;margin-top:2px}
+  .b{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .ok{background:var(--okbg);color:var(--ok)}.pln{background:var(--planbg);color:var(--plan)}.org{background:var(--orgbg);color:var(--org)}
+  code{background:#f0eefb;color:var(--acc);padding:1px 6px;border-radius:5px;font-size:12.5px}
+  .note{background:#fbf7ff;border:1px solid #ece3ff;border-radius:12px;padding:12px 16px;color:#5a4b7a;font-size:13.5px;margin:12px 0}
+  .warn{background:var(--warnbg);border:1px solid #f5ddc0;border-radius:12px;padding:12px 16px;color:#8a5a1b;font-size:13.5px;margin:12px 0}
+  .tbl{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+  .tbl th,.tbl td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  .tbl th{background:#f3f1fb;color:#4a3d8f;font-weight:700;font-size:12.5px}
+  .tbl td.c{text-align:center}
+  .yes{color:var(--ok);font-weight:800}.dash{color:#b7c0cf}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#f0eefb;color:var(--acc)}
+  .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+  .kpi .f{background:#faf9ff;border:1px solid #ece7fb;border-radius:10px;padding:10px 13px;font-size:13.5px}
+  .kpi .f b{color:var(--acc)}
+  @media(max-width:640px){.kpi{grid-template-columns:1fr}.toc ol{columns:1}}
+  .foot{color:var(--mut);text-align:center;font-size:12.5px;margin-top:30px}
+  .deliver{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .deliver .d{border:1px solid var(--line);border-radius:12px;padding:13px 16px;background:#fcfcfe}
+  .deliver .d b{display:block;margin-bottom:3px}
+  @media(max-width:640px){.deliver{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🛍️ Моя девочка — план реализации AI-агентов</h1>
+  <p class="sub">Детальный план работ и результат для клиента. Объём соответствует тарифу <b>«Максимум»</b>. Приоритет — агент «Аналитик продаж» (1С), агент «Маркетолог» (Instagram + ВК) — параллельно.</p>
+
+  <div class="goal">
+    <b>Итог для клиента.</b> Telegram-бот, который полностью заменяет ручную KPI-таблицу: сам берёт данные из 1С и соцсетей, считает все показатели <b>по вашим правилам</b> (включая правило 500 ₽, коэффициенты смен, корректировку трафика и возвраты по менеджерам), сверяет план/факт и присылает отчёты по расписанию — промежуточные в 15:00 и 18:00, итог за день после закрытия, а также неделя и месяц. Цифры совпадают с вашей KPI-таблицей (на ней держится расчёт ЗП), а поверх цифр AI даёт готовые рекомендации — кому какой показатель подтянуть.
+  </div>
+
+  <div class="toc">
+    <b>СОДЕРЖАНИЕ</b>
+    <ol>
+      <li><a href="#rezult">Что получит клиент (результат)</a></li>
+      <li><a href="#scope">Объём работ и тариф</a></li>
+      <li><a href="#arch">Как это устроено (архитектура)</a></li>
+      <li><a href="#rules">Бизнес-правила расчётов</a></li>
+      <li><a href="#plan">Детальный план по фазам</a></li>
+      <li><a href="#reports">Отчётность и расписание</a></li>
+      <li><a href="#accept">Критерии приёмки</a></li>
+      <li><a href="#from-client">Что нужно от клиента</a></li>
+      <li><a href="#assume">Допущения и границы</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. РЕЗУЛЬТАТ -->
+  <div class="part p" id="rezult">1. Что получит клиент по итогу <small>Конкретный результат на руках после сдачи проекта.</small></div>
+  <div class="card">
+    <div class="deliver">
+      <div class="d"><b>📬 Telegram-бот с отчётами</b>Промежуточные (15:00, 18:00), итог за день после закрытия, неделя, месяц — приходят сами по расписанию.</div>
+      <div class="d"><b>📊 План / факт по всем KPI</b>Товарооборот, трафик, средняя цена единицы, средний чек, UPT, конверсия — по магазину и по каждому менеджеру.</div>
+      <div class="d"><b>🏆 Рейтинг менеджеров + AI-выводы</b>Кто лидер, кто отстаёт, кому какой показатель подтянуть — человеческим языком.</div>
+      <div class="d"><b>🔥 Хиты продаж</b>Топ по цвету / размеру / модели и сигнал «повторить срочно», пока спрос горячий.</div>
+      <div class="d"><b>↩️ Возвраты и скидки</b>Возвраты привязаны к менеджеру и учтены в товарообороте; скидки/акции отражены по факту.</div>
+      <div class="d"><b>📈 Расширенная аналитика</b>Тренды и сезонность за полгода, аналитика по категориям и остаткам, динамика продавцов.</div>
+      <div class="d"><b>🔗 Связка маркетинга и продаж</b>Контент → трафик → покупки (с метками): видно, что реально доводит до чека.</div>
+      <div class="d"><b>🖥️ Дашборд + отчёты по запросу</b>Веб-дашборд и возможность запросить любой срез в любой момент.</div>
+      <div class="d"><b>📑 Еженедельная презентация</b>Готовая сводка по продажам для планёрки с командой.</div>
+      <div class="d"><b>🤖 AI-консультант</b>Отвечает клиентам и подбирает товар (отдельный модуль тарифа «Максимум»).</div>
+    </div>
+    <div class="note">Главный критерий результата: бот считает <b>ровно так же, как ваша нынешняя KPI-таблица</b> — чтобы на его цифры можно было опереться в расчёте зарплаты менеджеров.</div>
+  </div>
+
+  <!-- 2. SCOPE -->
+  <div class="part" id="scope">2. Объём работ и тариф <small>Что входит в реализацию. Соответствие пунктам КП.</small></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Возможность</th><th>Старт</th><th>Бизнес</th><th>Максимум</th></tr>
+      <tr><td><b>Агент 1 — Аналитик продаж (1С)</b></td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Конверсия / выручка / средний чек / UPT по продавцам</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Планы факт/план по менеджерам и магазину</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Хиты продаж: цвет / размер / модель</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Срезы день / неделя / месяц</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Аналитика за полгода: тренды и сезонность</td><td class="c dash">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Аналитика по категориям и остаткам</td><td class="c dash">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td><b>Агент 2 — Маркетолог (Instagram + ВК)</b></td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Связка «контент → трафик → продажи»</td><td class="c">базовая</td><td class="c">полная</td><td class="c">полная+метки</td></tr>
+      <tr><td>Генерация идей для постов</td><td class="c dash">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td>Еженедельная презентация для команды</td><td class="c dash">—</td><td class="c dash">—</td><td class="c yes">✓</td></tr>
+      <tr><td>AI-консультант для клиентов</td><td class="c dash">—</td><td class="c dash">—</td><td class="c yes">✓</td></tr>
+      <tr><td>Дашборд + отчёты ежедневно / по запросу</td><td class="c dash">—</td><td class="c dash">—</td><td class="c yes">✓</td></tr>
+    </table>
+    <p style="margin:6px 0 0"><span class="pill">Этот план покрывает тариф «Максимум»</span></p>
+  </div>
+
+  <!-- 3. АРХИТЕКТУРА -->
+  <div class="part" id="arch">3. Как это устроено <small>Принцип: цифры считает код по вашим правилам, выводы формулирует AI.</small></div>
+  <div class="card">
+    <ol class="list">
+      <li><b>Источники.</b> 1С (чеки, строки чеков, номенклатура с характеристиками, менеджеры по штрихкоду, трафик со счётчика, планы, возвраты) + Instagram/ВК через официальные API.</li>
+      <li><b>Коннектор.</b> Регулярно забирает данные из 1С и складывает в нашу базу (способ доступа — по согласованию с вашим 1С-программистом: прямое подключение / веб-сервис / выгрузка).</li>
+      <li><b>Движок расчётов.</b> Повторяет логику вашей KPI-таблицы (UPT, средняя цена единицы, средний чек, конверсия, план/факт, коэффициенты смен, правило 500 ₽, возвраты). Правила живут в коде — их легко менять без правок в 1С.</li>
+      <li><b>AI-слой.</b> Поверх готовых цифр пишет выводы и рекомендации.</li>
+      <li><b>Доставка.</b> Telegram-отчёты по расписанию + веб-дашборд и отчёты по запросу.</li>
+    </ol>
+    <div class="note">Открытый вопрос к согласованию с 1С-программистом: считать показатели <b>в нашем слое</b> (рекомендуем — правила гибкие, не трогаем вашу 1С) или <b>настроить расчёты прямо в 1С</b>. По умолчанию берём первый вариант, при необходимости выгружаем результат обратно.</div>
+  </div>
+
+  <!-- 4. БИЗНЕС-ПРАВИЛА -->
+  <div class="part g" id="rules">4. Бизнес-правила расчётов <small>Зафиксировано по вашим ответам. На этих правилах держится KPI и ЗП — считаем строго так.</small></div>
+  <div class="card">
+    <h3>Показатели</h3>
+    <div class="kpi">
+      <div class="f"><b>UPT</b> = учитываемые проданные единицы ÷ количество чеков</div>
+      <div class="f"><b>Средняя цена единицы</b> = выручка ÷ учитываемые единицы</div>
+      <div class="f"><b>Средний чек</b> = средняя цена единицы × UPT</div>
+      <div class="f"><b>Конверсия</b> = чеки ÷ скорректированный трафик</div>
+    </div>
+    <h3>Правило «единицы» (500 ₽)</h3>
+    <ul>
+      <li>Товар стоимостью <b>от 500 ₽</b> считается за единицу.</li>
+      <li>Товар <b>дешевле 500 ₽</b> (например, носки 150 ₽) — по отдельному правилу: если клиент купил только одну такую пару, она <b>не</b> учитывается как единица в UPT.</li>
+    </ul>
+    <h3>Трафик и конверсия</h3>
+    <ul>
+      <li>Счётчик на входе передаёт данные в 1С.</li>
+      <li>Трафик корректируется (минус сотрудники, модели, съёмочные команды) — в среднем ≈15 из 100. Для конверсии используется <b>скорректированный клиентский трафик</b>.</li>
+      <li>Реализуем механизм корректировки (ручной ввод поправки за день или правило по проценту — уточним удобный формат).</li>
+    </ul>
+    <h3>Возвраты, скидки, акции</h3>
+    <ul>
+      <li>Возврат оформляется в 1С, учитывается в общем KPI и <b>закрепляется за конкретным менеджером</b> (в его товарообороте).</li>
+      <li>Сумма возврата вычитается из товарооборота и из общей выручки.</li>
+      <li>Скидки/акции: в расчёт идёт фактическая сумма продажи.</li>
+    </ul>
+    <h3>Планы и коэффициенты</h3>
+    <ul>
+      <li>Общий месячный план магазина (пример: 6 млн ₽) + планы по трафику, средней цене единицы, среднему чеку и UPT.</li>
+      <li>План распределяется между менеджерами по коэффициентам (рабочие дни / часы / загрузка). Пример: двое на полный день — по 0,5 каждому.</li>
+      <li>Состав смен меняется в течение месяца — предусмотрим удобную корректировку коэффициентов (сейчас это делается вручную).</li>
+    </ul>
+    <h3>Период и время</h3>
+    <ul>
+      <li>Расчёт за каждый рабочий день/смену. Часовой пояс — <b>Пермь</b>.</li>
+      <li>Закрытие: зима — 21:00, лето — 22:00. После закрытия формируется итог за день.</li>
+    </ul>
+    <div class="warn">⚠️ KPI-таблица напрямую связана с расчётом зарплаты менеджеров. Поэтому до запуска делаем сверку: цифры бота = цифры вашей таблицы за тестовый период. Расхождения устраняем или объясняем.</div>
+  </div>
+
+  <!-- 5. ПЛАН -->
+  <div class="part g" id="plan">5. Детальный план по фазам <small>Пошагово. Приоритет — Фаза 1 (1С).</small></div>
+
+  <div class="card">
+    <h2>Фаза 1 — Агент «Аналитик продаж» (1С) <span class="pill">приоритет</span></h2>
+    <div class="step"><div class="num">1.1</div><div><div class="sf">Доступ и аудит данных <span class="b org">➖ от клиента</span></div><div class="sc">Доступ через AnyDesk/UrDesk + контакт 1С-программиста. Смотрим: привязку менеджера по штрихкоду, номенклатуру (наименование + характеристики цвет/размер), данные счётчика в 1С, где лежат планы, как оформляются возвраты и скидки.</div></div></div>
+    <div class="step"><div class="num">1.2</div><div><div class="sf">Коннектор к 1С</div><div class="sc">Налаживаем регулярную загрузку: чеки, строки чеков, номенклатура+характеристики, менеджеры, трафик, планы, возвраты. Проверяем полноту данных.</div></div></div>
+    <div class="step"><div class="num">1.3</div><div><div class="sf">Движок бизнес-правил (ядро)</div><div class="sc">Реализуем правила из раздела 4: UPT с правилом 500 ₽, средняя цена единицы, средний чек, конверсия по скорректированному трафику, учёт возвратов и скидок.</div></div></div>
+    <div class="step"><div class="num">1.4</div><div><div class="sf">Планы и коэффициенты</div><div class="sc">Общий план магазина → распределение по менеджерам с коэффициентами смен. План/факт по каждому показателю. Удобная корректировка смен.</div></div></div>
+    <div class="step"><div class="num">1.5</div><div><div class="sf">Рейтинг, хиты, AI-выводы</div><div class="sc">Рейтинг менеджеров по план/факт; хиты по цвету/размеру/модели и сигнал «повторить срочно»; AI-рекомендации, кому какой показатель подтянуть.</div></div></div>
+    <div class="step"><div class="num">1.6</div><div><div class="sf">Отчёты и расписание</div><div class="sc">Промежуточные 15:00 и 18:00 (выручка, UPT, план/факт), итог после закрытия, неделя, месяц. Деловой тон. Доставка в Telegram.</div></div></div>
+    <div class="step"><div class="num">1.7</div><div><div class="sf">Сверка с KPI-таблицей → приёмка</div><div class="sc">Прогон на реальных данных за тестовый период, сверка цифр с вашей таблицей (связь с ЗП), устранение расхождений, приёмка Фазы 1.</div></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Фаза 2 — Расширенная аналитика</h2>
+    <div class="step"><div class="num">2.1</div><div><div class="sf">Тренды и сезонность за полгода</div></div></div>
+    <div class="step"><div class="num">2.2</div><div><div class="sf">Аналитика по категориям товаров и остаткам</div></div></div>
+    <div class="step"><div class="num">2.3</div><div><div class="sf">Динамика и сравнение продавцов во времени</div></div></div>
+    <div class="step"><div class="num">2.4</div><div><div class="sf">Веб-дашборд + отчёты по запросу</div><div class="sc">Любой срез в любой момент, не только по расписанию.</div></div></div>
+    <div class="step"><div class="num">2.5</div><div><div class="sf">Еженедельная презентация для команды</div><div class="sc">Готовая сводка по продажам к планёрке.</div></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Фаза 3 — Агент «Маркетолог» (Instagram + ВК) <span class="pill">ядро готово</span></h2>
+    <div class="step"><div class="num">3.1</div><div><div class="sf">Подключение Instagram и ВК</div><div class="sc">Instagram — на готовом ядре (проверено на живом аккаунте), добавляем ВК.</div></div></div>
+    <div class="step"><div class="num">3.2</div><div><div class="sf">Анализ профиля, трендов, контент-стратегия</div></div></div>
+    <div class="step"><div class="num">3.3</div><div><div class="sf">Генерация идей для постов на основе аналитики</div></div></div>
+    <div class="step"><div class="num">3.4</div><div><div class="sf">Полная связка «реклама → трафик → покупки» с метками</div><div class="sc">Промокоды/QR из контента → сверка с чеками в 1С: видно, что реально доводит до покупки.</div></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Фаза 4 — AI-консультант <span class="pill">Максимум</span></h2>
+    <div class="step"><div class="num">4.1</div><div><div class="sf">AI-консультант для клиентов</div><div class="sc">Отвечает на вопросы, помогает подобрать товар.</div></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Фаза 5 — Запуск 24/7</h2>
+    <div class="step"><div class="num">5.1</div><div><div class="sf">Деплой на сервер</div><div class="sc">Работает сам, без включённого компьютера.</div></div></div>
+    <div class="step"><div class="num">5.2</div><div><div class="sf">Авто-расписание отчётов</div></div></div>
+    <div class="step"><div class="num">5.3</div><div><div class="sf">Финальная приёмка + короткая инструкция</div></div></div>
+  </div>
+
+  <!-- 6. ОТЧЁТЫ -->
+  <div class="part b" id="reports">6. Отчётность и расписание <small>По вашим требованиям к формату и времени.</small></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Когда</th><th>Что показывает</th></tr>
+      <tr><td><b>15:00</b> (промежуточный)</td><td>Текущая выручка, UPT, ход план/факт</td></tr>
+      <tr><td><b>18:00</b> (промежуточный)</td><td>Текущая выручка, UPT, ход план/факт</td></tr>
+      <tr><td><b>После закрытия</b><br>(зима 21:00 / лето 22:00)</td><td>Итог за день: план/факт по магазину и менеджерам, UPT, средний чек, конверсия, рейтинг, хиты, AI-выводы</td></tr>
+      <tr><td><b>Неделя</b></td><td>Динамика за неделю, лидеры/отстающие, выводы</td></tr>
+      <tr><td><b>Месяц</b></td><td>Выполнение месячного плана, тренды, сезонность, рекомендации</td></tr>
+    </table>
+    <div class="note"><b>Приоритет в отчёте (топ-3):</b> план/факт · UPT и его выполнение к плану · средний чек (план/факт). Далее — остальные показатели магазина и менеджеров. <b>Тон:</b> деловой, без лишней эмоциональности, удобный для ежедневного использования.</div>
+  </div>
+
+  <!-- 7. ПРИЁМКА -->
+  <div class="part" id="accept">7. Критерии приёмки <small>Когда считаем работу выполненной.</small></div>
+  <div class="card">
+    <ul>
+      <li><b>Совпадение с KPI-таблицей.</b> Цифры бота за тестовый период совпадают с вашей таблицей (все ключевые показатели по магазину и менеджерам).</li>
+      <li><b>Правила соблюдены.</b> UPT с правилом 500 ₽, скорректированный трафик, возвраты по менеджерам, коэффициенты смен — работают корректно.</li>
+      <li><b>Отчёты по расписанию.</b> 15:00, 18:00, после закрытия, неделя, месяц — приходят в Telegram автоматически.</li>
+      <li><b>Деловой формат</b> и приоритетные показатели (топ-3) присутствуют.</li>
+      <li><b>Работает 24/7</b> на сервере без включённого компьютера.</li>
+    </ul>
+  </div>
+
+  <!-- 8. ОТ КЛИЕНТА -->
+  <div class="part" id="from-client">8. Что нужно от клиента <small>Чтобы начать и не тормозить работу.</small></div>
+  <div class="card">
+    <ul>
+      <li><b>Доступ к 1С</b> (AnyDesk / UrDesk) и <b>контакт 1С-программиста</b>.</li>
+      <li><b>Актуальная KPI-таблица</b> и описание правил — как эталон для сверки.</li>
+      <li><b>Доступ к Instagram</b> (бизнес/creator) и, если подключаем, к <b>ВК</b>.</li>
+      <li><b>Планы магазина и менеджеров</b> на тестовый период + принцип коэффициентов смен.</li>
+      <li><b>Telegram-чат</b> для отчётов и список получателей.</li>
+      <li><b>Сервер</b> или согласие на наш хостинг.</li>
+    </ul>
+  </div>
+
+  <!-- 9. ДОПУЩЕНИЯ -->
+  <div class="part" id="assume">9. Допущения и границы <small>Чтобы ожидания совпадали.</small></div>
+  <div class="card">
+    <ul>
+      <li>Конверсия считается при наличии данных трафика из 1С; корректировка не-клиентов — по согласованному правилу.</li>
+      <li>Точность показателей ограничена качеством данных в 1С (корректная привязка менеджера по штрихкоду, заполненные характеристики цвет/размер).</li>
+      <li>Связка «реклама → покупки» требует меток (промокод/QR из контента) — их вводим на этапе Фазы 3.</li>
+      <li>Способ доступа к 1С и место расчётов (наш слой или 1С) согласуются с 1С-программистом на старте Фазы 1.</li>
+      <li>Сроки фиксируем после аудита данных (Этап 1.1); если есть жёсткий дедлайн — закладываем в план первым.</li>
+    </ul>
+  </div>
+
+  <p class="foot">Моя девочка · AI-агенты для магазина · План реализации · 2026</p>
+</div>
+</body>
+</html>
