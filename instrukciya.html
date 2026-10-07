@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Моя девочка — бот-аналитик: инструкция</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap');
+  :root{--bg:#f4f6fb;--panel:#fff;--ink:#1a2230;--mut:#6b7a90;--line:#e6eaf2;--acc:#7c5cfc;
+        --ok:#16a34a;--okbg:#e9f8ef;--shadow:0 6px 22px rgba(20,30,50,.06)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 'Manrope',-apple-system,Segoe UI,sans-serif;padding:28px 16px 70px}
+  .wrap{max-width:820px;margin:0 auto}
+  h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:25px;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--mut);margin:0 0 18px}
+  .part{font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;margin:30px 2px 12px;padding-left:12px;border-left:5px solid var(--acc)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px 22px;margin-bottom:14px}
+  ul{margin:6px 0 2px;padding-left:20px}li{margin:6px 0}
+  .cmd{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--line);align-items:baseline}
+  .cmd:first-of-type{border-top:0}
+  code{background:#f0eefb;color:var(--acc);padding:2px 9px;border-radius:6px;font-weight:700;font-size:13.5px}
+  .tbl{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0}
+  .tbl th,.tbl td{border:1px solid var(--line);padding:8px 11px;text-align:left}
+  .tbl th{background:#f3f1fb;color:#4a3d8f;font-weight:700;font-size:13px}
+  .note{background:#fbf7ff;border:1px solid #ece3ff;border-radius:12px;padding:12px 16px;color:#5a4b7a;font-size:13.5px;margin:10px 0}
+  b.k{color:var(--acc)}
+  .foot{color:var(--mut);text-align:center;font-size:12.5px;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🛍️ Моя девочка — бот-аналитик</h1>
+  <p class="sub">Короткая инструкция: что умеет бот и как им пользоваться. Все цифры считаются автоматически, выводы формулирует AI — вручную таблицы вести не нужно.</p>
+
+  <div class="part">Что делает бот</div>
+  <div class="card">
+    <ul>
+      <li><b>Продажи (из 1С):</b> план/факт по магазину и каждому продавцу — выручка, UPT, средний чек, конверсия; рейтинг продавцов; хиты товаров (цвет/размер/модель) и сигнал «повторить срочно».</li>
+      <li><b>Соцсети (Instagram/ВК):</b> что из контента «залетело», анализ профиля и трендов, контент-стратегия.</li>
+      <li><b>AI-выводы:</b> кому какой показатель подтянуть и что докупить — человеческим языком.</li>
+    </ul>
+  </div>
+
+  <div class="part">Команды</div>
+  <div class="card">
+    <div class="cmd"><code>/pday</code><div>Продажи за сегодня</div></div>
+    <div class="cmd"><code>/pweek</code><div>Продажи за неделю</div></div>
+    <div class="cmd"><code>/pmonth</code><div>Продажи за месяц</div></div>
+    <div class="cmd"><code>/pnow</code><div>Промежуточный срез прямо сейчас (выручка, UPT)</div></div>
+    <div class="cmd"><code>/day /week /month</code><div>Отчёты по соцсетям (Instagram/ВК)</div></div>
+    <div class="cmd"><code>/start</code><div>Список команд</div></div>
+  </div>
+
+  <div class="part">Автоматические отчёты (время Перми)</div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Когда</th><th>Что приходит</th></tr>
+      <tr><td><b>15:00 и 18:00</b></td><td>Промежуточный срез: текущая выручка, UPT, ход план/факт</td></tr>
+      <tr><td><b>После закрытия</b></td><td>Итог за день: план/факт, рейтинг продавцов, хиты, выводы</td></tr>
+      <tr><td><b>Понедельник</b></td><td>Итоги недели</td></tr>
+      <tr><td><b>Начало месяца</b></td><td>Итоги месяца: выполнение плана, тренды</td></tr>
+    </table>
+    <div class="note">Отчёты приходят в рабочий Telegram-чат сами. Команды можно вызвать в любой момент вручную.</div>
+  </div>
+
+  <div class="part">Как читать дневной отчёт</div>
+  <div class="card">
+    <ul>
+      <li><b class="k">🎯 План/факт выручки</b> — сколько сделали от плана (в % и рублях).</li>
+      <li><b class="k">📦 UPT</b> — среднее число вещей в чеке (план/факт).</li>
+      <li><b class="k">🧾 Средний чек</b> — средняя сумма покупки (план/факт).</li>
+      <li><b class="k">🚶 Конверсия</b> — сколько зашедших купили.</li>
+      <li><b class="k">🏆 Рейтинг</b> — продавцы по выручке и выполнению плана.</li>
+      <li><b class="k">🔥 Хиты</b> — что продаётся лучше всего; «повторить срочно» — что докупить.</li>
+      <li><b class="k">💡 Рекомендации</b> — кому что подтянуть.</li>
+    </ul>
+  </div>
+
+  <div class="part">Что нужно от вас</div>
+  <div class="card">
+    <ul>
+      <li>Доступ к данным 1С (через вашего 1С-программиста — настраивается один раз).</li>
+      <li>Рабочий Telegram-чат для отчётов и список получателей.</li>
+      <li>Планы магазина и продавцов на период.</li>
+    </ul>
+    <div class="note">⏳ Сейчас бот работает в демонстрационном режиме (на тестовых данных). После подключения вашей 1С он покажет реальные цифры магазина.</div>
+  </div>
+
+  <p class="foot">Моя девочка · AI-бот аналитики магазина · Инструкция · 2026</p>
+</div>
+</body>
+</html>
